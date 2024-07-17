@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors:{
-        origin:['https://unique-pudding-d1b9c9.netlify.app'],
+        origin:['https://statuesque-sunburst-a1b092.netlify.app'],
         methods:['GET', 'POST'],
     },
 });
