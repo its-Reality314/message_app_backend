@@ -12,7 +12,7 @@ dotenv.config({});
  
 const PORT = process.env.PORT || 5000;
 const corsOption={
-    origin:'https://statuesque-sunburst-a1b092.netlify.app',
+    origin:'https://eloquent-sprite-eb1e1f.netlify.app',
     credentials:true
 };
 app.use(cors(corsOption)); 
