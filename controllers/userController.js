@@ -63,12 +63,22 @@ export const login = async (req, res) => {
 
         const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
 
-        return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
+        // return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'strict' }).json({
+        //     _id: user._id,
+        //     username: user.username,
+        //     fullName: user.fullName,
+        //     profilePhoto: user.profilePhoto
+        // });
+
+  return res.status(200).json({
             _id: user._id,
             username: user.username,
             fullName: user.fullName,
-            profilePhoto: user.profilePhoto
+            profilePhoto: user.profilePhoto,
+            token:token
         });
+
+
 
     } catch (error) {
         console.log(error);
@@ -79,6 +89,8 @@ export const logout = (req, res) => {
         return res.status(200).cookie("token", "", { maxAge: 0 }).json({
             message: "logged out successfully.",
 
+            secure:true,
+        sameSite:"None",
         })
     } catch (error) {
         console.log(error);
@@ -88,6 +100,7 @@ export const getOtherUsers = async (req, res) => {
     try {
         const loggedInUserId = req.id;
         const otherUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
+        console.log("taking ........")
         return res.status(200).json(otherUsers);
     } catch (error) {
         console.log(error);
