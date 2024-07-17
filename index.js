@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 const corsOption={
     origin:'https://unique-pudding-d1b9c9.netlify.app',
-    credentials:true
+    credentials:include
 };
 app.use(cors(corsOption)); 
 
